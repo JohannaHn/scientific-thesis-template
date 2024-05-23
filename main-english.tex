@@ -204,28 +204,104 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% !TeX spellcheck = de_DE
+
 \chapter{Introduction}
+\textcolor{red}{Different types of neural networks (NNs) exist for various types of data, and a choice must
+be made based on the application. For instance, Convolutional neural networks (CNNs) are well
+suited for modeling image/spatial data fields, whereas Recurrent neural networks (RNNs) are specialized NNs for modeling sequential data, like time signals. \cite{mohan2018deep}.}
+\section*{Gliederung}
+Die Arbeit ist in folgender Weise gegliedert:
+\begin{description}
+\item[Kapitel~\ref{chap:k2} -- \nameref{chap:k2}:] Hier werden werden die Grundlagen dieser Arbeit beschrieben.
+\item[Kapitel~\ref{chap:zusfas} -- \nameref{chap:zusfas}] fasst die Ergebnisse der Arbeit zusammen und stellt Anknüpfungspunkte vor.
+\end{description}
+
+
+
 
 This thesis starts with \cref{chap:k2}.
 
 We can also typeset \verb|<text>verbatim text</text>|.
 Backticks are also rendered correctly: \verb|`words in backticks`|.
 
-\chapter{Chapter Two}
+% !TeX spellcheck = de_DE
+
+\chapter{Background}
+\textcolor{red}{Machine learning is rapidly becoming a core technology for scientiﬁc computing, with numerous opportunities to advance the ﬁeld of computational ﬂuid dynamics. } \cite{vin2021}
+
+As Vinuesa et al. \cite{vin2021} state, machine learning plays an increasing role in scientific computing and facilitates advances especially in the field of computational fluid dynamics. 
+\section{Related Work}
+Approaches for heat plume prediction with CNNs have been put forth by Leiteritz et al. \cite{leiteritz2022deep}, Davis et al. \cite{davis2023deep} and Pelzer and Schulte \cite{pelzer2024}. 
+While \cite{leiteritz2022deep} and \cite{davis2023deep} use the subsurface velocity field as input, \cite{pelzer2024} use the pressure gradients and subsurface permeability.
+In contrast to the subsurface velocity, the latter features can be measured directly at the bore hole, which improves the applicability of the model. Furthermore, \cite{pelzer2024} used a two stage approach: the first stage models single heat plumes neglecting the influence of surrounding heat pumps. Expanding on this, the second stage refines the predictions by taking into account interactions with adjacent heat plumes.
+
+TODO - PINNs: The approach of using physics informed neural networks for 
+
+In the field of turbulent flow control Mohan and Gaitonde \cite{mohan2018deep} made an advance in using LSTMs for fluid mechanic modeling. In their work, they developed a LSTM for predicting the key physical features of a high-fidelity flow field. 
+
+\begin{itemize}
+    \item The input signal covers 0-0.1 seconds and the prediction horizon is 0.1-0.2 seconds. 
+    \item They also applied the \textbf{Hurst exponent} to assess the suitability of a LSTM as a predictive modelling approach.
+    \item They employed a multiple model approach. One model for each POD mode.
+\end{itemize}
+
+
+This work aims on leveraging 
+
+As LSTMs are predominantly used for sequence modeling 
+
+
+
+
+
+
+\section{Neural Networks}
+\chapter{Problem}
 \label{chap:k2}
 
-LaTeX hints are provided in \cref{chap:latexhints}.
+Hier wird der Hauptteil stehen. Falls mehrere Kapitel gewünscht, entweder mehrmals \texttt{\textbackslash{}chapter} benutzen oder pro Kapitel eine eigene Datei anlegen und \texttt{ausarbeitung.tex} anpassen.
 
-\blinddocument
 
-\chapter{Related Work}
+\section{Data}
+There are three data sets:
 
-Describe relevant scientific literature related to your work.
+\begin{enumerate}
+    \item dataset\_long\_k\_3e-10\_7dp
+    \item dataset\_medium\_100dp\_vary\_perm
+    \item dataset\_medium\_k\_3e-10\_1000dp
+\end{enumerate}
+\section{Goal}
 
-\chapter{Conclusion and Outlook}
-\label{chap:zusfas}
+\chapter{Method}
+\begin{itemize}
+    \item Predicting the heat plume of a GWHP can be viewed as a sequence modeling problem in machine learning.
+    \item Problem Classification
+    \begin{itemize}
+        \item Sequence-to-Sequence Learning \cite{sutskever2014sequence}
+        \item \textbf{Spatiotemporal sequence forecasting} problem in which both the input and the prediction target are spatiotemporal sequence \cite{ShiConvLSTMPrecipitation}
+    \end{itemize}
+    \item Why FC-LSTM does not work: \newline
+    The major impediment of FC-LSTMs for spatiotemporal data is its insufficient ability to capture spatial information. 
+    It is unclear how a machine learning algorithm could handel the spatiotemporal data.
+    This issue is mitigated by using convolutional layers in the input-to-state and state-to-state-transitions. 
+    The convolutional layers also supports the encoding-forecasting strucutre. 
+\end{itemize}
 
-\section*{Outlook}
+\section{Network Architecture}
+
+\section{Parameter, Functions etc.}
+\section{Training Strategy}
+% Alternativ: Literaturrecherche nach Introduction
+%Problem Kapitel aufteilen
+
+\chapter{Evaluation}
+\section{Test Design}
+\section{Results}
+
+%noch etwas Fülltext
+%\blinddocument
+
 
 \printbibliography
 
