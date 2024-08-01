@@ -234,9 +234,9 @@ As Vinuesa et al. \cite{vin2021} state, machine learning plays an increasing rol
 \section{Related Work}
 Approaches for heat plume prediction with CNNs have been put forth by Leiteritz et al. \cite{leiteritz2022deep}, Davis et al. \cite{davis2023deep} and Pelzer and Schulte \cite{pelzer2024}. 
 While \cite{leiteritz2022deep} and \cite{davis2023deep} use the subsurface velocity field as input, \cite{pelzer2024} use the pressure gradients and subsurface permeability.
-In contrast to the subsurface velocity, the latter features can be measured directly at the bore hole, which improves the applicability of the model. Furthermore, \cite{pelzer2024} used a two stage approach: the first stage models single heat plumes neglecting the influence of surrounding heat pumps. Expanding on this, the second stage refines the predictions by taking into account interactions with adjacent heat plumes.
+In contrast to the subsurface velocity, the latter features can be measured directly at the bore hole, which improves the applicability of the model. Furthermore, \cite{pelzer2024} used a two stage approach: The first stage models single heat plumes neglecting the influence of surrounding heat pumps. Expanding on this, the second stage refines the predictions by taking into account interactions with adjacent heat plumes.
 
-TODO - PINNs: The approach of using physics informed neural networks for 
+Presumably the first work to combine convolution with LSTMs is "Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting". \cite{ShiConvLSTMPrecipitation} Preciptation forecasts over a relatively short period of time for a specific region is addressed with the help of several meteorological parameters, which are measured continuously across the entire spatial window. The resulting data is perceived as spatiotemporal sequence. Convolutional layers in the net are incorporated for the purpose of capturing and encoding spatial relations in the data. LSTM cells are then added to continue the sequence on basis of previously seen training data. Further convolutional layers then decode the information into again spatial data.
 
 In the field of turbulent flow control Mohan and Gaitonde \cite{mohan2018deep} made an advance in using LSTMs for fluid mechanic modeling. In their work, they developed a LSTM for predicting the key physical features of a high-fidelity flow field. 
 
@@ -246,15 +246,7 @@ In the field of turbulent flow control Mohan and Gaitonde \cite{mohan2018deep} m
     \item They employed a multiple model approach. One model for each POD mode.
 \end{itemize}
 
-
-This work aims on leveraging 
-
-As LSTMs are predominantly used for sequence modeling 
-
-
-
-
-
+TODO - PINNs: The approach of using physics informed neural networks for 
 
 \section{Neural Networks}
 \chapter{Problem}
@@ -291,14 +283,27 @@ There are three data sets:
 \section{Network Architecture}
 
 \section{Parameter, Functions etc.}
+From my experience, this is actually pretty typical behaviour for an LSTM training curve. My intuition for this phenomena is as follows:
+the LSTM learns to predict the “average” signal by setting the bias parameters (first plateau)
+the LSTM figures out how to use the (forward and recurrent) weight parameters to actually solve the task (second plateau)
+This can be interpreted as a saddle point (where the function is much steeper in bias dimensions than in the other dimensions).\newline
+\includegraphics[width=\textwidth]{graphics/fluctuating_val_loss.png}
+https://discuss.pytorch.org/t/werid-training-loss-curve/8799/3
 \section{Training Strategy}
 % Alternativ: Literaturrecherche nach Introduction
 %Problem Kapitel aufteilen
 
-\chapter{Evaluation}
+\chapter{Ablation Study}
 \section{Test Design}
 \section{Results}
-
+\begin{figure}
+  \includegraphics[width=\textwidth, trim=0 18mm 1cm 0, clip]{graphics/predicted_plume_steps20_dp2_withPerm.png}
+  \caption[dp 2 with perm]{The predicted plume and error with permeability as input}
+\end{figure}
+\begin{figure}
+  \includegraphics[width=\textwidth, trim=0 18mm 1cm 0, clip]{graphics/predicted_plume_steps20_dp4_withPerm.png}
+  \caption[dp 2 with perm]{The predicted plume and error with permeability as input}
+\end{figure}
 %noch etwas Fülltext
 %\blinddocument
 
